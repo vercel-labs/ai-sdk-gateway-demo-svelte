@@ -42,22 +42,11 @@
 </script>
 
 <div class="grid w-screen h-screen grid-rows-[1fr_auto] max-w-[800px] m-auto">
-  <div class="flex flex-col-reverse gap-8 p-8 overflow-y-auto">
-    {#each chat.messages as message (message.id || `${message.role}-${message.content.substring(0, 10)}`)}
-      {#if message.role === "user"}
-        <div
-          class="whitespace-pre-wrap bg-muted/50 rounded-md p-3 ml-auto max-w-[80%]"
-        >
-          {message.content}
-        </div>
-      {:else}
-        <div class="whitespace-pre-wrap">
-          {message.content}
-        </div>
-      {/if}
+  <ul>
+    {#each chat.messages as message}
+      <li>{message.role}: {message.content}</li>
     {/each}
-  </div>
-
+  </ul>
   <form
     on:submit={chat.handleSubmit}
     class="flex justify-center px-8 pt-0 pb-8"
