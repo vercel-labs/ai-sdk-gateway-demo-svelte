@@ -1,5 +1,5 @@
 <script>
-  import "../app.css";
+  import "../app.pcss";
 </script>
 
 <svelte:head>
@@ -10,4 +10,8 @@
   />
 </svelte:head>
 
-<slot />
+<div class="min-h-screen bg-background antialiased">
+  <main class="flex min-h-screen flex-col">
+    <slot />
+  </main>
+</div>

@@ -41,37 +41,41 @@
   }
 </script>
 
-<div class="grid w-screen h-screen grid-rows-[1fr_auto] max-w-[800px] m-auto">
-  <ul>
+<div
+  class="container flex flex-col items-center justify-between max-w-[800px] mx-auto p-4 h-screen"
+>
+  <div class="flex-1 w-full overflow-y-auto space-y-4 py-4">
     {#each chat.messages as message}
-      <li>{message.role}: {message.content}</li>
+      <div
+        class="rounded-lg p-4 {message.role === 'user'
+          ? 'bg-primary text-primary-foreground ml-auto max-w-[80%]'
+          : 'bg-muted mr-auto max-w-[80%]'}"
+      >
+        {message.content}
+      </div>
     {/each}
-  </ul>
-  <form
-    on:submit={chat.handleSubmit}
-    class="flex justify-center px-8 pt-0 pb-8"
-  >
-    <Card class="w-full p-0">
-      <CardContent class="flex items-center gap-3 p-2">
+  </div>
+  <form on:submit={chat.handleSubmit} class="w-full pb-4">
+    <Card class="w-full">
+      <CardContent class="flex items-center gap-3 p-3">
         <ModelSelector {modelId} />
-
         <div class="flex flex-1 items-center">
           <Input
             bind:this={inputElement}
             bind:value={chat.input}
             name="prompt"
             placeholder="Type your message..."
-            class="flex-1 border-0 focus-visible:ring-0 focus-visible:ring-offset-0"
+            class="flex-1 focus-visible:ring-1"
             on:keydown={handleKeyDown}
           />
-
           <Button
             type="submit"
             size="icon"
             variant="ghost"
-            class="h-8 w-8 ml-1"
+            class="h-9 w-9 ml-1"
           >
-            <Send class="h-4 w-4" />
+            <!-- <Send class="h-5 w-5" />  Temporarily comment out or remove -->
+            Test <!-- Add some text instead -->
           </Button>
         </div>
       </CardContent>
