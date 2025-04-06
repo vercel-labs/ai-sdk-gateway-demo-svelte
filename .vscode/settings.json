@@ -1,0 +1,10 @@
+{
+  "css.validate": false,
+  "tailwindCSS.includeLanguages": {
+    "svelte": "html"
+  },
+  "tailwindCSS.experimental.configFile": "tailwind.config.js",
+  "editor.quickSuggestions": {
+    "strings": true
+  }
+}
