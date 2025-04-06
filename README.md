@@ -1,38 +1,29 @@
-# sv
+# AI SDK Gateway Demo (Svelte)
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+A simple [Svelte](https://svelte.dev) chatbot app to demonstrate the use of the Vercel AI Gateway with the [AI SDK](https://sdk.vercel.ai).
 
-## Creating a project
+## Getting Started
 
-If you're seeing this, you've probably already done this step. Congrats!
+### One-time setup
 
-```bash
-# create a new project in the current directory
-npx sv create
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel-labs%2Fai-sdk-gateway-demo-svelte)
 
-# create a new project in my-app
-npx sv create my-app
-```
+1. Clone this repository with the Deploy button above
+1. Install the [Vercel CLI](https://vercel.com/docs/cli) if you don't already have it
+1. Clone the repository you created above: `git clone <repo-url>`
+1. Link it to a Vercel project under your account: `vc link`
+1. Visit the linked Vercel project to enable an authentication token for use with AI Gateway (we're working on automating this):
+   1. visit the project settings page (rightmost tab in your project's dashboard)
+   1. search for 'OIDC' in settings
+   1. toggle the button under "Secure Backend Access with OIDC Federation" to Enabled and click the "Save" button
 
-## Developing
+### Usage
+1. Fetch the project's OIDC authentication token locally via `vc env pull`. The token expiry is 12h. You'll need to re-run this command to fetch a new token when it expires (we're working on automating this).
+1. Start the development server with `vc dev`
+1. Open http://localhost:5173 with your browser to try the chatbot.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+## Authors
 
-```bash
-npm run dev
+This repository is maintained by the [Vercel](https://vercel.com) team and community contributors. 
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Contributions are welcome! Feel free to open issues or submit pull requests to enhance functionality or fix bugs.
