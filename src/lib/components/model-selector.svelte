@@ -1,11 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
   import { goto } from "$app/navigation";
+  import { Loader2 } from "lucide-svelte";
+  import * as Select from "$lib/components/ui/select";
 
   export let modelId: string;
-
-  // Debug output
-  console.log("Current modelId:", modelId);
 
   interface Model {
     id: string;
@@ -14,70 +13,65 @@
 
   let models: Model[] = [];
   let loading = true;
+  let error: Error | null = null;
+  let selectedValue = modelId; // Use this for binding
+
+  $: {
+    // React to changes in selectedValue
+    if (selectedValue && selectedValue !== modelId) {
+      const url = new URL(window.location.href);
+      url.searchParams.set("modelId", selectedValue);
+      goto(url.toString(), { replaceState: true });
+    }
+  }
+
+  $: triggerContent =
+    models.find((m) => m.id === selectedValue)?.name ||
+    selectedValue ||
+    "Select a model";
 
   onMount(async () => {
-    console.log("Component mounted, loading:", loading);
     try {
       const response = await fetch("/api/models");
       const data = await response.json();
       models = data.models || [];
-      console.log("Models loaded:", models);
-      console.log("Current modelId after loading:", modelId);
-    } catch (error) {
+    } catch (err) {
+      error = err as Error;
       console.error("Failed to fetch models:", error);
     } finally {
       loading = false;
-      console.log("Loading complete, loading state:", loading);
     }
   });
-
-  function handleModelChange(event: Event) {
-    const newModelId = (event.target as HTMLSelectElement).value;
-    console.log("Model changed to:", newModelId);
-    const url = new URL(window.location.href);
-
-    if (newModelId) {
-      url.searchParams.set("modelId", newModelId);
-    } else {
-      url.searchParams.delete("modelId");
-    }
-
-    goto(url.toString(), { replaceState: true });
-  }
 </script>
 
-<div class="relative inline-block">
-  <select
-    value={modelId}
-    on:change={handleModelChange}
-    class="h-9 w-full min-w-[180px] appearance-none rounded-md border border-input bg-background px-3 py-1 pr-8 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-  >
+<Select.Root
+  type="single"
+  bind:value={selectedValue}
+  disabled={loading || !!error || !models.length}
+>
+  <Select.Trigger class="w-[180px]">
     {#if loading}
-      <option value="">Loading models...</option>
-    {:else if models.length === 0}
-      <option value="">No models available</option>
+      <div class="flex items-center gap-2">
+        <Loader2 class="h-4 w-4 animate-spin" />
+        <span>Loading</span>
+      </div>
+    {:else if error}
+      <span class="text-red-500">Error</span>
+    {:else if !models.length}
+      <span>No models</span>
     {:else}
-      {#each models as model}
-        <option value={model.id}>{model.name || model.id}</option>
-      {/each}
+      {triggerContent}
     {/if}
-  </select>
-  <div
-    class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      class="lucide lucide-chevron-down h-4 w-4 opacity-50"
-    >
-      <path d="m6 9 6 6 6-6" />
-    </svg>
-  </div>
-</div>
+  </Select.Trigger>
+
+  <Select.Content>
+    <Select.Group>
+      <Select.GroupHeading>Models</Select.GroupHeading>
+      {#each models as model (model.id)}
+        <Select.Item value={model.id} label={model.name || model.id}>
+          {model.name || model.id}
+        </Select.Item>
+      {/each}
+    </Select.Group>
+  </Select.Content>
+</Select.Root>

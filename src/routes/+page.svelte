@@ -4,7 +4,8 @@
   import { Card, CardContent } from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
   import { Send } from "lucide-svelte";
-  import ModelSelector from "$lib/components/model-selector.svelte";
+  // TODO: why doesn't $lib work below?
+  import ModelSelector from "../lib/components/model-selector.svelte";
   import { Chat } from "@ai-sdk/svelte";
 
   const DEFAULT_MODEL = "xai/grok-2-1212";
@@ -28,10 +29,6 @@
     }, 0);
   });
 
-  $: {
-    console.log("Model changed to:", modelId);
-  }
-
   function handleKeyDown(event: KeyboardEvent) {
     if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
       const target = event.target as HTMLElement;
@@ -47,9 +44,9 @@
   <div class="flex-1 w-full overflow-y-auto space-y-4 py-4">
     {#each chat.messages as message}
       <div
-        class="rounded-lg p-4 {message.role === 'user'
-          ? 'bg-primary text-primary-foreground ml-auto max-w-[80%]'
-          : 'bg-muted mr-auto max-w-[80%]'}"
+        class={message.role === "user"
+          ? "bg-muted/50 rounded-md p-3 ml-auto max-w-[80%]"
+          : "whitespace-pre-wrap mr-auto max-w-[80%]"}
       >
         {message.content}
       </div>
@@ -74,8 +71,7 @@
             variant="ghost"
             class="h-9 w-9 ml-1"
           >
-            <!-- <Send class="h-5 w-5" />  Temporarily comment out or remove -->
-            Test <!-- Add some text instead -->
+            <Send class="h-5 w-5" />
           </Button>
         </div>
       </CardContent>
