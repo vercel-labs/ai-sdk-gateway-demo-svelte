@@ -19,8 +19,8 @@ A simple [Svelte](https://svelte.dev) chatbot app to demonstrate the use of the 
 
 ### Usage
 1. Fetch the project's OIDC authentication token locally via `vc env pull`. The token expiry is 12h. You'll need to re-run this command to fetch a new token when it expires (we're working on automating this).
-1. Start the development server with `vc dev`
-1. Open http://localhost:5173 with your browser to try the chatbot.
+1. `pnpm i` (or `npm i` or `yarn i`) and `vc dev`
+1. Open http://localhost:5173 to try the chatbot.
 
 ## Authors
 
