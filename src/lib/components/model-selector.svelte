@@ -14,10 +14,9 @@
   let models: Model[] = [];
   let loading = true;
   let error: Error | null = null;
-  let selectedValue = modelId; // Use this for binding
+  let selectedValue = modelId;
 
   $: {
-    // React to changes in selectedValue
     if (selectedValue && selectedValue !== modelId) {
       const url = new URL(window.location.href);
       url.searchParams.set("modelId", selectedValue);
@@ -53,14 +52,22 @@
     {#if loading}
       <div class="flex items-center gap-2">
         <Loader2 class="h-4 w-4 animate-spin" />
-        <span>Loading</span>
+        <span class="overflow-hidden whitespace-nowrap text-ellipsis"
+          >Loading</span
+        >
       </div>
     {:else if error}
-      <span class="text-red-500">Error</span>
+      <span class="text-red-500 overflow-hidden whitespace-nowrap text-ellipsis"
+        >Error</span
+      >
     {:else if !models.length}
-      <span>No models</span>
+      <span class="overflow-hidden whitespace-nowrap text-ellipsis"
+        >No models</span
+      >
     {:else}
-      {triggerContent}
+      <span class="overflow-hidden whitespace-nowrap text-ellipsis block"
+        >{triggerContent}</span
+      >
     {/if}
   </Select.Trigger>
 
