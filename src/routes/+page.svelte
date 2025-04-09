@@ -1,41 +1,36 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { page } from "$app/stores"; // Import page store
   import { Button } from "$lib/components/ui/button";
   import { Card, CardContent } from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
-  import { Send } from "lucide-svelte";
+  import { Alert, AlertDescription } from "$lib/components/ui/alert";
+  import { Send, AlertCircle } from "lucide-svelte";
   // TODO: why doesn't $lib work below?
   import ModelSelector from "../lib/components/model-selector.svelte";
-  import { Chat } from "@ai-sdk/svelte";
+  import { Chat, type ChatOptions } from "@ai-sdk/svelte";
 
   const DEFAULT_MODEL = "xai/grok-2-1212";
-  let modelId = DEFAULT_MODEL;
   let inputElement: any;
 
-  const chat = new Chat({
-    body: {
-      modelId: modelId,
-    },
-  });
+  $: modelId = $page.url.searchParams.get("modelId") || DEFAULT_MODEL;
+
+  let chat: Chat;
+  $: {
+    chat = new Chat({
+      body: {
+        modelId,
+      },
+    });
+  }
 
   onMount(() => {
-    const url = new URL(window.location.href);
-    modelId = url.searchParams.get("modelId") || DEFAULT_MODEL;
-
     setTimeout(() => {
       if (inputElement && inputElement.focus) {
         inputElement.focus();
       }
     }, 0);
   });
-
-  function handleKeyDown(event: KeyboardEvent) {
-    if ((event.metaKey || event.ctrlKey) && event.key === "Enter") {
-      const target = event.target as HTMLElement;
-      const form = target.closest("form");
-      if (form) form.requestSubmit();
-    }
-  }
 </script>
 
 <div
@@ -52,6 +47,7 @@
       </div>
     {/each}
   </div>
+
   <form on:submit={chat.handleSubmit} class="w-full pb-4">
     <Card class="w-full">
       <CardContent class="flex items-center gap-3 p-3">
@@ -63,7 +59,6 @@
             name="prompt"
             placeholder="Type your message..."
             class="flex-1 focus-visible:ring-1"
-            on:keydown={handleKeyDown}
           />
           <Button
             type="submit"
