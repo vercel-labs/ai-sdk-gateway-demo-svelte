@@ -4,11 +4,10 @@
   import { Button } from "$lib/components/ui/button";
   import { Card, CardContent } from "$lib/components/ui/card";
   import { Input } from "$lib/components/ui/input";
-  import { Alert, AlertDescription } from "$lib/components/ui/alert";
-  import { Send, AlertCircle } from "lucide-svelte";
+  import { Send } from "lucide-svelte";
   // TODO: why doesn't $lib work below?
   import ModelSelector from "../lib/components/model-selector.svelte";
-  import { Chat, type ChatOptions } from "@ai-sdk/svelte";
+  import { Chat } from "@ai-sdk/svelte";
 
   const DEFAULT_MODEL = "xai/grok-2-1212";
   let inputElement: any;
