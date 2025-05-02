@@ -12,8 +12,8 @@ importers:
         specifier: ^2.1.6
         version: 2.1.6(svelte@5.25.7)(zod@3.24.2)
       '@vercel/ai-sdk-gateway':
-        specifier: ^0.0.2
-        version: 0.0.2(zod@3.24.2)
+        specifier: ^0.0.10
+        version: 0.0.10(zod@3.24.2)
       ai:
         specifier: ^4.3.2
         version: 4.3.2(react@19.1.0)(zod@3.24.2)
@@ -96,6 +96,10 @@ packages:
 
   '@ai-sdk/provider@1.1.0':
     resolution: {integrity: sha512-0M+qjp+clUD0R1E5eWQFhxEvWLNaOtGQRUaBn8CUABnSKredagq92hUS9VjOzGsTm37xLfpaxl97AVtbeOsHew==}
+    engines: {node: '>=18'}
+
+  '@ai-sdk/provider@1.1.3':
+    resolution: {integrity: sha512-qZMxYJ0qqX/RfnuIaab+zp8UAeJn/ygXXAffR5I4N0n1IrvA6qBsjc8hXLmBiMV2zoXlifkacF7sEFnYnjBcqg==}
     engines: {node: '>=18'}
 
   '@ai-sdk/react@1.2.6':
@@ -662,14 +666,14 @@ packages:
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
-  '@vercel/ai-sdk-gateway@0.0.2':
-    resolution: {integrity: sha512-77P40UPK8PTgqm5BBg9RfWAAth4ZaPbXluCQBLiqZq+4wJntYxB6yEcwZWya/mQcK3TecZalyKUY90YifisTaw==}
+  '@vercel/ai-sdk-gateway@0.0.10':
+    resolution: {integrity: sha512-beCnj8frxxz9X4g2H2LAdr8kDpaxmX/EjkaEErkJ2Hc0gCp0J6iVnt0fJ+h1PCsZRifQNIu2158uqB1tQPy+Pw==}
     engines: {node: '>=20'}
     peerDependencies:
       zod: ^3.23.8
 
-  '@vercel/functions@2.0.0':
-    resolution: {integrity: sha512-BSwIihLHoV18gerKZJyGuqd3rtaYM6rJvET1kOwKktshucyaHXTJel7Cxegs+sdX0NZqsX4LO2MFnMU2jG01Cw==}
+  '@vercel/functions@2.0.1':
+    resolution: {integrity: sha512-WmGX0+wAPn0AEYN5GZjrlrGE6Vr/pkkmbfHoZjoAmJn+Vybi8/jM0gil4M3D8hRYq3k1uDKuNzrHnToXc+s8Ag==}
     engines: {node: '>= 18'}
     peerDependencies:
       '@aws-sdk/credential-provider-web-identity': '*'
@@ -1668,6 +1672,10 @@ snapshots:
     dependencies:
       json-schema: 0.4.0
 
+  '@ai-sdk/provider@1.1.3':
+    dependencies:
+      json-schema: 0.4.0
+
   '@ai-sdk/react@1.2.6(react@19.1.0)(zod@3.24.2)':
     dependencies:
       '@ai-sdk/provider-utils': 2.2.4(zod@3.24.2)
@@ -2066,16 +2074,16 @@ snapshots:
 
   '@types/estree@1.0.7': {}
 
-  '@vercel/ai-sdk-gateway@0.0.2(zod@3.24.2)':
+  '@vercel/ai-sdk-gateway@0.0.10(zod@3.24.2)':
     dependencies:
-      '@ai-sdk/provider': 1.0.7
+      '@ai-sdk/provider': 1.1.3
       '@ai-sdk/provider-utils': 2.1.6(zod@3.24.2)
-      '@vercel/functions': 2.0.0
+      '@vercel/functions': 2.0.1
       zod: 3.24.2
     transitivePeerDependencies:
       - '@aws-sdk/credential-provider-web-identity'
 
-  '@vercel/functions@2.0.0': {}
+  '@vercel/functions@2.0.1': {}
 
   '@vercel/nft@0.29.2(rollup@4.39.0)':
     dependencies:
