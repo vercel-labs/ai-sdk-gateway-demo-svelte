@@ -12,8 +12,8 @@ importers:
         specifier: ^2.1.6
         version: 2.1.6(svelte@5.25.7)(zod@3.24.2)
       '@vercel/ai-sdk-gateway':
-        specifier: ^0.0.10
-        version: 0.0.10(zod@3.24.2)
+        specifier: ^0.0.13
+        version: 0.0.13(zod@3.24.2)
       ai:
         specifier: ^4.3.2
         version: 4.3.2(react@19.1.0)(zod@3.24.2)
@@ -666,8 +666,8 @@ packages:
   '@types/estree@1.0.7':
     resolution: {integrity: sha512-w28IoSUCJpidD/TGviZwwMJckNESJZXFu7NBZ5YJ4mEUnNraUn9Pm8HSZm/jDF1pDWYKspWE7oVphigUPRakIQ==}
 
-  '@vercel/ai-sdk-gateway@0.0.10':
-    resolution: {integrity: sha512-beCnj8frxxz9X4g2H2LAdr8kDpaxmX/EjkaEErkJ2Hc0gCp0J6iVnt0fJ+h1PCsZRifQNIu2158uqB1tQPy+Pw==}
+  '@vercel/ai-sdk-gateway@0.0.13':
+    resolution: {integrity: sha512-vNhzL94j4c0EaWiVj3D5Ek05c3NRKnH0977l3Ycy1PGqdjbbH4YXPaixNKgqWcqOrHXTPr/3Tef3za4nna474Q==}
     engines: {node: '>=20'}
     peerDependencies:
       zod: ^3.23.8
@@ -2074,7 +2074,7 @@ snapshots:
 
   '@types/estree@1.0.7': {}
 
-  '@vercel/ai-sdk-gateway@0.0.10(zod@3.24.2)':
+  '@vercel/ai-sdk-gateway@0.0.13(zod@3.24.2)':
     dependencies:
       '@ai-sdk/provider': 1.1.3
       '@ai-sdk/provider-utils': 2.1.6(zod@3.24.2)
