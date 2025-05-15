@@ -9,7 +9,7 @@
   import ModelSelector from "../lib/components/model-selector.svelte";
   import { Chat } from "@ai-sdk/svelte";
 
-  const DEFAULT_MODEL = "xai/grok-2-1212";
+  const DEFAULT_MODEL = "xai/grok-3-beta";
   let inputElement: any;
 
   $: modelId = $page.url.searchParams.get("modelId") || DEFAULT_MODEL;

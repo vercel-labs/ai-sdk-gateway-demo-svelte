@@ -2,7 +2,7 @@ import { gateway } from "@vercel/ai-sdk-gateway";
 import { streamText } from "ai";
 import type { RequestEvent } from "@sveltejs/kit";
 
-const DEFAULT_MODEL = "xai/grok-2-1212";
+const DEFAULT_MODEL = "xai/grok-3-beta";
 
 export async function POST({ request }: RequestEvent) {
   const { messages, modelId = DEFAULT_MODEL } = await request.json();
