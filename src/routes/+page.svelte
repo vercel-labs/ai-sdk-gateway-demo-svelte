@@ -8,11 +8,18 @@
   // TODO: why doesn't $lib work below?
   import ModelSelector from "../lib/components/model-selector.svelte";
   import { Chat } from "@ai-sdk/svelte";
+  import { defaultChatStore } from "ai";
 
   const DEFAULT_MODEL = "xai/grok-3-beta";
   let inputElement: any;
 
   $: modelId = $page.url.searchParams.get("modelId") || DEFAULT_MODEL;
+
+  const chatStore = defaultChatStore({
+    api: "/api/chat",
+    maxSteps: 5,
+    chats: {},
+  });
 
   let chat: Chat;
   $: {
@@ -42,7 +49,9 @@
           ? "bg-muted/50 rounded-md p-3 ml-auto max-w-[80%]"
           : "whitespace-pre-wrap mr-auto max-w-[80%]"}
       >
-        {message.content}
+        {message.parts
+          .map((part) => (part.type === "text" ? part.text : ""))
+          .join("")}
       </div>
     {/each}
   </div>
