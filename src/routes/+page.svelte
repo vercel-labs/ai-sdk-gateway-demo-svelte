@@ -25,7 +25,7 @@
     event.preventDefault();
     if (!input.trim() || disabled) return;
     
-    chat.sendMessage({ text: input });
+    chat.sendMessage({ text: input }, { body: { modelId } });
     input = "";
   }
 
