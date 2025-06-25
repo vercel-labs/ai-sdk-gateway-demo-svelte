@@ -4,14 +4,9 @@ import type { RequestHandler } from "@sveltejs/kit";
 import { SUPPORTED_MODELS } from "$lib/constants";
 
 export const GET: RequestHandler = async () => {
-  const allModels = await gateway.getAvailableModels();
-
-  // Filter to only include supported models
-  const supportedModels = {
-    models: allModels.models.filter((model) =>
+  return json({
+    models: (await gateway.getAvailableModels()).models.filter((model) =>
       SUPPORTED_MODELS.includes(model.id)
     ),
-  };
-
-  return json(supportedModels);
+  });
 };

@@ -12,21 +12,7 @@
     name: string;
   }
 
-  const DEFAULT_MODELS: Model[] = [
-    { id: "xai/grok-3-beta", name: "Grok 3 Beta" },
-    { id: "bedrock/amazon.nova-lite-v1:0", name: "Nova Lite" },
-    { id: "bedrock/amazon.nova-micro-v1:0", name: "Nova Micro" },
-    { id: "openai/gpt-4o-mini", name: "GPT-4o Mini" },
-    { id: "openai/gpt-3.5-turbo", name: "GPT-3.5 Turbo" },
-    { id: "anthropic/claude-3-haiku", name: "Claude 3 Haiku" },
-    { id: "vertex/gemini-2.0-flash-001", name: "Gemini 2.0 Flash" },
-    { id: "groq/llama-3.1-8b", name: "Llama 3.1 8B" },
-    { id: "groq/gemma2-9b-it", name: "Gemma 2 9B IT" },
-    { id: "mistral/ministral-8b-latest", name: "Ministral 8B" },
-    { id: "mistral/ministral-3b-latest", name: "Ministral 3B" },
-  ];
-
-  let models: Model[] = DEFAULT_MODELS;
+  let models: Model[] = [];
   let loading = true;
   let error: Error | null = null;
   let selectedValue = modelId;
@@ -46,10 +32,10 @@
 
   function buildModelList(models: any[]): Model[] {
     // Filter to only include supported models
-    const supportedModels = models.filter(model => 
+    const supportedModels = models.filter((model) =>
       SUPPORTED_MODELS.includes(model.id)
     );
-    
+
     return supportedModels.map((model) => ({
       id: model.id,
       name: model.name || model.id,
@@ -61,11 +47,11 @@
       const response = await fetch("/api/models");
       const data = await response.json();
       const newModels = buildModelList(data.models || []);
-      models = newModels.length > 0 ? newModels : DEFAULT_MODELS;
+      models = newModels.length > 0 ? newModels : [];
     } catch (err) {
       error = err as Error;
       console.error("Failed to fetch models:", error);
-      models = DEFAULT_MODELS;
+      models = [];
     } finally {
       loading = false;
     }
